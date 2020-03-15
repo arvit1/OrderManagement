@@ -1,16 +1,14 @@
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { Reflector } from '@nestjs/core';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Role } from 'src/users/entities/role.entity';
-import { Repository } from 'typeorm';
-import { User } from 'src/users/entities/user.entity';
+import {CanActivate, ExecutionContext, Injectable} from '@nestjs/common';
+import {Reflector} from '@nestjs/core';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {User} from "../../users/entities/user.entity";
 
 @Injectable()
 export class RolesGuard implements CanActivate {
   constructor(private readonly reflector: Reflector,
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>,) {}
+    private readonly userRepository: Repository<User>) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     console.log("Controllo RUOLO");
