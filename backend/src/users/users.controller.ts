@@ -32,7 +32,7 @@ export class UsersController {
     }
  
     @Get()
-    @Roles('MEMBER')
+    @Roles('ADMIN')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     findAll(@Query() query: ListUserDto) {
         /**
