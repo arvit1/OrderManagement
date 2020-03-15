@@ -1,0 +1,12 @@
+{
+  "type": "mysql",
+  "host": "5.189.155.214",
+  "port": 3306,
+  "username": "arvit",
+  "password": "Mclaren1!",
+  "database": "orderman",
+  "entities": [
+    "src/**/entities/*.entity{.ts,.js}"
+  ],
+  "synchronize": true
+}
