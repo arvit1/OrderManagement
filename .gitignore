@@ -67,6 +67,7 @@ Thumbs.db
 
 # IDEs and editors
 /backend/.idea
+/backend/dist
 /backend/.project
 /backend/.classpath
 /backend/.c9/
