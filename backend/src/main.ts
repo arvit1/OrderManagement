@@ -53,7 +53,8 @@ async function initDB(){
     if(user == undefined){
       bcrypt.genSalt(saltRounds, function(err, salt) {
         bcrypt.hash("password", salt, async function(err, hash) {
-          await getConnection().getRepository(User).save({ id: 1, username:"admin", email: "admin@admin.it", password: hash, role:adminRole});
+          // await getConnection().getRepository(User).save({ id: 1, username:"admin", email: "admin@admin.it", password: hash, role:adminRole});
+          await getConnection().getRepository(User).save({ id: 1, username:"admin", email: "admin@admin.it", password: hash, roles:[adminRole, memberRole]});
         });
      });
     }
@@ -63,7 +64,8 @@ async function initDB(){
     if(user == undefined){
       bcrypt.genSalt(saltRounds, function(err, salt) {
         bcrypt.hash("generic", salt, async function(err, hash) {
-          await getConnection().getRepository(User).save({ id: 2, username:"generic", email: "generic@member.it", password: hash, role:memberRole});
+          // await getConnection().getRepository(User).save({ id: 2, username:"generic", email: "generic@member.it", password: hash, role:memberRole});
+          await getConnection().getRepository(User).save({ id: 2, username:"generic", email: "generic@member.it", password: hash, roles:[memberRole]});
         });
      });
     }

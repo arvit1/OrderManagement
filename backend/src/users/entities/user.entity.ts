@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne } from 'typeorm';
-import { Role } from './role.entity';
+import {Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {Role} from "./role.entity";
 
 @Entity()
 export class User {
@@ -22,7 +22,10 @@ export class User {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   update_at: Date;
 
-  @ManyToOne(type => Role, role => role.users)
-  role: Role;
+  // @ManyToOne(type => Role, role => role.users)
+  // role: Role;
 
+  @ManyToMany(type => Role)
+  @JoinTable()
+  roles: Role[];
 }

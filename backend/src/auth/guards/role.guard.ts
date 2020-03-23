@@ -24,23 +24,24 @@ export class RolesGuard implements CanActivate {
     const user = request.user;
     if(user){
 
-      let uRole = await this.userRepository.findOne(user.id, {relations: ["role"]})
-      const hasRole = () => roles.some((role) =>{ if(uRole && uRole.role && uRole.role.name == role) return true; else false;});   
-      return hasRole();
-
+      // let uRole = await this.userRepository.findOne(user.id, {relations: ["role"]})
+      // const hasRole = () => roles.some((role) =>{ if(uRole && uRole.role && uRole.role.name == role) return true; else false;});
+      // return hasRole();
+      return await this.checkRole(user, roles[0]);
     }else{
 
       return false;
     }
   }
 
-  async checkRole(user, roles): Promise<boolean>{
-    let uRole = await this.userRepository.findOne(user.id, {relations: ["role"]})
-    console.log(uRole);
-    console.log(roles);
-    const hasRole = () => roles.some((role) =>{ if(uRole.role.name == role) return true; else false;});
+  async checkRole(user, role1): Promise<boolean>{
+    let uRole = await this.userRepository.findOne(user.id, {relations: ["roles"]})
+    console.log(role1);
+    console.log(uRole.roles);
+
+    const hasRole = () => uRole.roles.some((role) =>{ if(role.name == role1) return true; else false;});
     console.log(hasRole());
-      
-    return user && user.role && hasRole();
+
+    return user && hasRole();
   }
 }

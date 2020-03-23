@@ -15,6 +15,6 @@ export class Role {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     update_at: Date;
 
-    @OneToMany(type => User, user => user.role)
-    users: User[];
+    // @OneToMany(type => User, user => user.role)
+    // users: User[];
 }
