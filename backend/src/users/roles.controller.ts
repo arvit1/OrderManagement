@@ -4,6 +4,8 @@ import { ListUserDto } from './dto/list-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { RolesService } from './roles.service';
 import { AuthGuard } from '@nestjs/passport';
+import {Roles} from "../auth/roles.decorator";
+import {RolesGuard} from "../auth/guards/role.guard";
 
 @Controller('api/roles')
 export class RolesController {
@@ -18,6 +20,8 @@ export class RolesController {
     }
  
     @Get()
+    @Roles('MEMBER')
+    @UseGuards(AuthGuard('jwt'), RolesGuard)
     findAll(@Query() query: ListUserDto) {
 
         var roles = this.rolesService.findAll();
