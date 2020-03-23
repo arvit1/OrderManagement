@@ -25,7 +25,7 @@ export class User {
   // @ManyToOne(type => Role, role => role.users)
   // role: Role;
 
-  @ManyToMany(type => Role)
+  @ManyToMany(type => Role, {cascade: ['insert', 'update', 'remove']})
   @JoinTable()
   roles: Role[];
 }
