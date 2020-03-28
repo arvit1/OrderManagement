@@ -20,8 +20,8 @@ async function bootstrap() {
   SwaggerModule.setup('explorer', app, document);
 
   //Initialize User and Role
-  initDB(); 
-
+  initDB();
+  app.enableCors();
   await app.listen(3000);
   
 }
