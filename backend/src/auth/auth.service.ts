@@ -16,7 +16,7 @@ export class AuthService {
     private readonly userRepository: Repository<User>
   ) {}
 
-  async signIn(payload: IJWTPayload): Promise<string> {
+  async signIn(payload: IJWTPayload): Promise<any> {
     // In the real-world app you shouldn't expose this method publicly
     // instead, return a token once you verify user credentials
     //const user: IJWTPayload = { email: 'user@email.com', password: "ciaociao" };
@@ -33,7 +33,7 @@ export class AuthService {
     if(user){
       let check = await bcrypt.compare(payload.password, user.password)
       if(check)
-        return this.jwtService.sign(payload);
+        return {...user, "token": this.jwtService.sign(payload)};
       else
         throw UnauthorizedException;
     }else{
