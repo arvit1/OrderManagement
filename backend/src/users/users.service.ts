@@ -35,9 +35,7 @@ export class UsersService {
   }
 
     
-/*
-  findOne(id:number): User {
-    //return this.users[id];
+  async findOne(id:number): Promise<User> {
+    return await this.userRepository.findOne(id, {relations: ["roles"]});
   }
-*/
 }

@@ -35,19 +35,18 @@ export class UsersController {
         /**
          * IMPLEMENTARE LE WHERE NELLA FIND
          */
-        var users = this.usersService.findAll();
-        return users;
+        return this.usersService.findAll();
     }
   
     @Get(':id')
     @Roles('ADMIN')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
-    findOne(@Param('id') id: string) {
+    findOne(@Param('id') id: number) {
 
       /**
        * IMPLEMENTARE FIND
        */
-      return `This action returns a #${id} user`;
+      return this.usersService.findOne(id);
     }
   
     @Put(':id')
