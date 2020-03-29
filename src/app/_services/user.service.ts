@@ -7,20 +7,13 @@ import { AuthenticationService } from './authentication.service';
 @Injectable({ providedIn: 'root' })
 export class UserService {
     constructor(private http: HttpClient,
-                private authenticationService: AuthenticationService,
-                private header: any) {
-
-        header = {
-            headers: new HttpHeaders()
-                .set('Authorization', `Bearer ${this.authenticationService.currentUserValue.token}`)
-        };
-    }
+                private authenticationService: AuthenticationService) {}
 
     getAll() {
-        return this.http.get<User[]>(`http://5.189.155.214:3000/api/users`, { headers: this.header });
+        return this.http.get<User[]>(`http://5.189.155.214:3000/api/users`);
     }
 
     getById(id: number) {
-        return this.http.get<User>(`http://5.189.155.214:3000/api/users/${id}`, { headers: this.header });
+        return this.http.get<User>(`http://5.189.155.214:3000/api/users/${id}`);
     }
 }
