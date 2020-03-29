@@ -16,7 +16,7 @@ export class AuthenticationService {
     }
 
     public get currentUserValue(): User {
-        return this.currentUserSubject.getValue();
+        return this.currentUserSubject.value;
     }
 
     login(username: string, password: string) {
