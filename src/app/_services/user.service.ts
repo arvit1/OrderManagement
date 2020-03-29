@@ -2,12 +2,10 @@
 import {HttpClient} from '@angular/common/http';
 
 import {User} from './../_models';
-import {AuthenticationService} from './authentication.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    constructor(private http: HttpClient,
-                private authenticationService: AuthenticationService) {}
+    constructor(private http: HttpClient) {}
 
     getAll() {
         return this.http.get<User[]>(`http://5.189.155.214:3000/api/users`);
