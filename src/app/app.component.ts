@@ -19,6 +19,14 @@ export class AppComponent {
         return this.currentUser && this.currentUser.roles[0].name === RoleEnum.Admin;
     }
 
+    get isStore() {
+        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.Store;
+    }
+
+    get isWarehouse() {
+        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.Warehouse;
+    }
+
     logout() {
         this.authenticationService.logout();
         this.router.navigate(['/login']);

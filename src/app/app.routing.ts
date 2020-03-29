@@ -1,4 +1,6 @@
-﻿import { Routes, RouterModule } from '@angular/router';
+﻿import { WarehouseComponent } from './warehouse/warehouse.component';
+import { StoreComponent } from './store/store.component';
+import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home';
 import { AdminComponent } from './admin';
@@ -10,7 +12,20 @@ const appRoutes: Routes = [
     {
         path: '',
         component: HomeComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        // data: { roles: [RoleEnum.User] }
+    },
+    {
+        path: 'store',
+        component: StoreComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [RoleEnum.Store] }
+    },
+    {
+        path: 'warehouse',
+        component: WarehouseComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [RoleEnum.Warehouse] }
     },
     {
         path: 'admin',
