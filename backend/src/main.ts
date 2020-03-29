@@ -1,10 +1,10 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import {NestFactory} from '@nestjs/core';
+import {AppModule} from './app.module';
+import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 import {getConnection} from "typeorm";
 import {User} from './users/entities/user.entity'
 import * as bcrypt from 'bcrypt';
-import { Role } from './users/entities/role.entity';
+import {Role} from './users/entities/role.entity';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -44,9 +44,16 @@ async function initDB(){
   });
 
   //Crea Ruolo MEMBER
-  const memberRole = await roleRepo.findOne(2).then(async (role)=>{
+  const magazinaRole = await roleRepo.findOne(2).then(async (role)=>{
     if(role == undefined){
-      role = await roleRepo.save({ id: 2, name:"MEMBER"});
+      role = await roleRepo.save({ id: 2, name:"MAGAZINA"});
+    }
+    return role;
+  });
+
+  const dyqanRole = await roleRepo.findOne(3).then(async (role)=>{
+    if(role == undefined){
+      role = await roleRepo.save({ id: 3, name:"DYQAN"});
     }
     return role;
   });
@@ -57,8 +64,7 @@ async function initDB(){
     if(user == undefined){
       bcrypt.genSalt(saltRounds, function(err, salt) {
         bcrypt.hash("password", salt, async function(err, hash) {
-          // await getConnection().getRepository(User).save({ id: 1, username:"admin", email: "admin@admin.it", password: hash, role:adminRole});
-          await getConnection().getRepository(User).save({ id: 1, username:"admin", email: "admin@admin.it", password: hash, roles:[adminRole, memberRole]});
+          await getConnection().getRepository(User).save({ id: 1, username:"admin", email: "admin@admin.it", password: hash, roles:[adminRole, magazinaRole, dyqanRole], first_name: "adminFirst", last_name: "adminLast"});
         });
      });
     }
@@ -67,11 +73,20 @@ async function initDB(){
   await userRepo.findOne(2).then(async (user)=>{
     if(user == undefined){
       bcrypt.genSalt(saltRounds, function(err, salt) {
-        bcrypt.hash("generic", salt, async function(err, hash) {
-          // await getConnection().getRepository(User).save({ id: 2, username:"generic", email: "generic@member.it", password: hash, role:memberRole});
-          await getConnection().getRepository(User).save({ id: 2, username:"generic", email: "generic@member.it", password: hash, roles:[memberRole]});
+        bcrypt.hash("password", salt, async function(err, hash) {
+          await getConnection().getRepository(User).save({ id: 2, username:"magazina", email: "magazina@member.it", password: hash, roles:[magazinaRole, dyqanRole], first_name: "magazinaFirst", last_name: "magazinaLast"});
         });
      });
+    }
+  });
+
+  await userRepo.findOne(3).then(async (user)=>{
+    if(user == undefined){
+      bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash("password", salt, async function(err, hash) {
+          await getConnection().getRepository(User).save({ id: 3, username:"dyqan", email: "dyqan@member.it", password: hash, roles:[dyqanRole], first_name: "dyqanFirst", last_name: "dyqanLast"});
+        });
+      });
     }
   });
 }

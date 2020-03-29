@@ -28,4 +28,10 @@ export class User {
   @ManyToMany(type => Role, {cascade: ['insert', 'update', 'remove']})
   @JoinTable()
   roles: Role[];
+
+  @Column()
+  first_name: string;
+
+  @Column()
+  last_name: string;
 }
