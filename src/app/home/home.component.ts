@@ -1,11 +1,11 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
 import { User } from './../_models';
 import { UserService, AuthenticationService } from './../_services';
 
 @Component({ templateUrl: 'home.component.html' })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
     currentUser: User;
     userFromApi: User;
 
@@ -14,6 +14,7 @@ export class HomeComponent {
         private authenticationService: AuthenticationService
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
+        console.log('this.currentUsr: ', this.currentUser);
     }
 
     ngOnInit() {
