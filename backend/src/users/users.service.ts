@@ -1,10 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-//import { User } from './interface/user.interface';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import {Injectable} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {User} from './entities/user.entity';
 import {IUser} from './interfaces/user.interface'
-import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -14,10 +12,7 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-    //private readonly users: User[] = [];
-    
   create(user: IUser) {
-    //this.users.push(user);
     this.userRepository.create(user);
   }
 
@@ -30,9 +25,9 @@ export class UsersService {
 
     let user;
     if(email){
-      user = await this.userRepository.findOne({ where: { email: email}});
+      user = await this.userRepository.findOne({ where: { email: email}, relations: ["roles"]});
     }else if(username){
-      user = await this.userRepository.findOne({ where: { username: username}});
+      user = await this.userRepository.findOne({ where: { username: username}, relations: ["roles"]});
     }else{
       user = undefined;
     }

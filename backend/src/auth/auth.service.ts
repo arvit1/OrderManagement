@@ -23,9 +23,9 @@ export class AuthService {
     //console.log(payload);
     let user;
     if(payload.email){
-      user = await this.userRepository.findOne({ where: { email: payload.email}});
+      user = await this.userRepository.findOne({ where: { email: payload.email}, relations: ["roles"]});
     }else if(payload.username){
-      user = await this.userRepository.findOne({ where: { username: payload.username}});
+      user = await this.userRepository.findOne({ where: { username: payload.username}, relations: ["roles"]});
     }else{
       throw UnauthorizedException;
     }

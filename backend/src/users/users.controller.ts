@@ -1,14 +1,11 @@
-import { Controller, UseGuards, Post, Get, Body, Query, Param, Put, Delete } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { ListUserDto } from './dto/list-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersService } from './users.service';
-import { AuthGuard } from '@nestjs/passport';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards} from '@nestjs/common';
+import {CreateUserDto} from './dto/create-user.dto';
+import {ListUserDto} from './dto/list-user.dto';
+import {UpdateUserDto} from './dto/update-user.dto';
+import {UsersService} from './users.service';
+import {AuthGuard} from '@nestjs/passport';
 import {RolesGuard} from "../auth/guards/role.guard";
-import { Roles } from '../auth/roles.decorator';
-import { LoginUserDto } from './dto/login-user.dto';
-import { AuthService } from '../auth/auth.service';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import {Roles} from '../auth/roles.decorator';
 
 @Controller('api/users')
 export class UsersController {
@@ -25,7 +22,7 @@ export class UsersController {
             password: createUserDto.password,
             create_at: new Date(),
             update_at: new Date()
-        }
+        };
         
         this.usersService.create(user);
         return user;
