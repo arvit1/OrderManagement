@@ -20,6 +20,8 @@ export class UsersController {
             email: createUserDto.email,
             username: createUserDto.username,
             password: createUserDto.password,
+            first_name: createUserDto.first_name,
+            last_name: createUserDto.last_name,
             create_at: new Date(),
             update_at: new Date()
         };
