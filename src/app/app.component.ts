@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from './_services';
-import { User, Role } from './_models';
+import { User, RoleEnum } from './_models';
 
 @Component({ selector: 'app', templateUrl: 'app.component.html' })
 export class AppComponent {
@@ -16,7 +16,7 @@ export class AppComponent {
     }
 
     get isAdmin() {
-        return this.currentUser && this.currentUser.role === Role.Admin;
+        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.Admin;
     }
 
     logout() {

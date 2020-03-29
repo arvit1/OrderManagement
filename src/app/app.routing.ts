@@ -4,7 +4,7 @@ import { HomeComponent } from './home';
 import { AdminComponent } from './admin';
 import { LoginComponent } from './login';
 import { AuthGuard } from './_guards';
-import { Role } from './_models';
+import { RoleEnum } from './_models';
 
 const appRoutes: Routes = [
     {
@@ -16,7 +16,7 @@ const appRoutes: Routes = [
         path: 'admin',
         component: AdminComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin] }
+        data: { roles: [RoleEnum.Admin] }
     },
     {
         path: 'login',

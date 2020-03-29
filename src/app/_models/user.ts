@@ -1,4 +1,9 @@
-﻿import { Role } from "./role";
+﻿export interface Role {
+    id: number;
+    name: string;
+    create_at: Date;
+    update_at: Date;
+}
 
 export class User {
     id: number;
@@ -6,6 +11,6 @@ export class User {
     password: string;
     firstName: string;
     lastName: string;
-    role: Role;
+    roles: Role[];
     token?: string;
 }
