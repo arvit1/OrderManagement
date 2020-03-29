@@ -21,7 +21,11 @@ async function bootstrap() {
 
   //Initialize User and Role
   initDB();
-  app.enableCors();
+  app.enableCors({
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  });
   await app.listen(3000);
   
 }
