@@ -6,13 +6,14 @@ import { AuthenticationService } from './authentication.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
+    header: any;
     constructor(private http: HttpClient,
-                private authenticationService: AuthenticationService,
-                private header: any) {
+                private authenticationService: AuthenticationService) {
 
-        header = {
+        this.header = {
             headers: new HttpHeaders()
-                .set('Authorization', `Bearer ${this.authenticationService.currentUserValue.token}`)
+                .set('Authorization', `Bearer ${this.authenticationService.currentUserValue.token}`),
+            withCrendentials: true
         };
     }
 
