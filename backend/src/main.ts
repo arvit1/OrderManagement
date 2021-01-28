@@ -5,9 +5,12 @@ import {getConnection} from "typeorm";
 import {User} from './users/entities/user.entity'
 import * as bcrypt from 'bcrypt';
 import {Role} from './users/entities/role.entity';
+import {initializeTransactionalContext, Transactional} from 'typeorm-transactional-cls-hooked';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  initializeTransactionalContext(); // Initialize cls-hooked
 
   const options = new DocumentBuilder()
     .setTitle('Auth Server')
@@ -27,11 +30,11 @@ async function bootstrap() {
     credentials: true,
   });
   await app.listen(3000);
-  
+
 }
 
 async function initDB(){
-  
+
   const roleRepo = await getConnection().getRepository(Role);
   const userRepo = await getConnection().getRepository(User);
 
