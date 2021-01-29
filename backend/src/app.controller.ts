@@ -11,7 +11,7 @@ export class AppController {
 
   @Get()
   async getHello() {
-    return await this.entityManager.query("SELECT * FROM user");
+    return await this.entityManager.query("SELECT * FROM role");
     // return this.appService.getHello();
   }
 }
