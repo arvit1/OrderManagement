@@ -1,8 +1,8 @@
 import {NestFactory} from '@nestjs/core';
 import {AppModule} from './app.module';
 import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
-import {getConnection} from "typeorm";
-import {User} from './users/entities/user.entity'
+import {getConnection} from 'typeorm';
+import {User} from './users/entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import {Role} from './users/entities/role.entity';
 
@@ -19,7 +19,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('explorer', app, document);
 
-  //Initialize User and Role
+  // Initialize User and Role
   initDB();
   app.enableCors({
     origin: true,
@@ -30,60 +30,67 @@ async function bootstrap() {
 
 }
 
-async function initDB(){
+async function initDB() {
 
   await  getConnection().transaction(async transactionalEntityManager => {
 
-    //Crea Ruolo ADMIN
-    const adminRole = await transactionalEntityManager.connection.getRepository(Role).findOne(1).then(async (role)=>{
-      if(role == undefined){
-        role = await transactionalEntityManager.connection.getRepository(Role).save({ id: 1, name:"ADMIN"});
+    // Crea Ruolo ADMIN
+    const adminRole = await transactionalEntityManager.connection.getRepository(Role).findOne(1).then(async (role) => {
+      // tslint:disable-next-line:triple-equals
+      if (role === undefined) {
+        role = await transactionalEntityManager.connection.getRepository(Role).save({ id: 1, name: 'ADMIN'});
       }
       return role;
     });
 
-    //Crea Ruolo MEMBER
-    const magazinaRole = await transactionalEntityManager.connection.getRepository(Role).findOne(2).then(async (role)=>{
-      if(role == undefined){
-        role = await transactionalEntityManager.connection.getRepository(Role).save({ id: 2, name:"MAGAZINA"});
+    // Crea Ruolo MEMBER
+    const magazinaRole = await transactionalEntityManager.connection.getRepository(Role).findOne(2).then(async (role) => {
+      if (role === undefined) {
+        role = await transactionalEntityManager.connection.getRepository(Role).save({ id: 2, name: 'MAGAZINA'});
       }
       return role;
     });
 
-    const dyqanRole = await transactionalEntityManager.connection.getRepository(Role).findOne(3).then(async (role)=>{
-      if(role == undefined){
-        role = await transactionalEntityManager.connection.getRepository(Role).save({ id: 3, name:"DYQAN"});
+    const dyqanRole = await transactionalEntityManager.connection.getRepository(Role).findOne(3).then(async (role) => {
+      if (role === undefined) {
+        role = await transactionalEntityManager.connection.getRepository(Role).save({ id: 3, name: 'DYQAN'});
       }
       return role;
     });
 
     const saltRounds = 10;
-    //Create ADMIN
-    await transactionalEntityManager.connection.getRepository(User).findOne(1).then(async (user)=>{
-      if(user == undefined){
-        bcrypt.genSalt(saltRounds, function(err, salt) {
-          bcrypt.hash("password", salt, async function(err, hash) {
-            await transactionalEntityManager.connection.getRepository(User).save({ id: 1, username:"admin", email: "admin@admin.it", password: hash, roles:[adminRole, magazinaRole, dyqanRole], first_name: "adminFirst", last_name: "adminLast"});
+    // Create ADMIN
+    await transactionalEntityManager.connection.getRepository(User).findOne(1).then(async (user) => {
+      if (user === undefined) {
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+          bcrypt.hash('password', salt, async (err2, hash) => {
+            await transactionalEntityManager.connection.getRepository(User).save(
+              { id: 1, username: 'admin', email: 'admin@admin.it', password: hash, roles: [adminRole, magazinaRole, dyqanRole],
+                first_name: 'adminFirst', last_name: 'adminLast'});
           });
        });
       }
     });
 
-    await transactionalEntityManager.connection.getRepository(User).findOne(2).then(async (user)=>{
-      if(user == undefined){
-        bcrypt.genSalt(saltRounds, function(err, salt) {
-          bcrypt.hash("password", salt, async function(err, hash) {
-            await transactionalEntityManager.connection.getRepository(User).save({ id: 2, username:"magazina", email: "magazina@member.it", password: hash, roles:[magazinaRole, dyqanRole], first_name: "magazinaFirst", last_name: "magazinaLast"});
+    await transactionalEntityManager.connection.getRepository(User).findOne(2).then(async (user) => {
+      if (user === undefined) {
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+          bcrypt.hash('password', salt, async (err2, hash) => {
+            await transactionalEntityManager.connection.getRepository(User).save(
+              { id: 2, username: 'magazina', email: 'magazina@member.it', password: hash, roles: [magazinaRole, dyqanRole],
+                first_name: 'magazinaFirst', last_name: 'magazinaLast'});
           });
        });
       }
     });
 
-    await transactionalEntityManager.connection.getRepository(User).findOne(3).then(async (user)=>{
-      if(user == undefined){
-        bcrypt.genSalt(saltRounds, function(err, salt) {
-          bcrypt.hash("password", salt, async function(err, hash) {
-            await transactionalEntityManager.connection.getRepository(User).save({ id: 3, username:"dyqan", email: "dyqan@member.it", password: hash, roles:[dyqanRole], first_name: "dyqanFirst", last_name: "dyqanLast"});
+    await transactionalEntityManager.connection.getRepository(User).findOne(3).then(async (user) => {
+      if (user === undefined) {
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+          bcrypt.hash('password', salt, async (err2, hash) => {
+            await transactionalEntityManager.connection.getRepository(User).save(
+              { id: 3, username: 'dyqan', email: 'dyqan@member.it', password: hash, roles: [dyqanRole],
+                first_name: 'dyqanFirst', last_name: 'dyqanLast'});
           });
         });
       }
@@ -92,4 +99,3 @@ async function initDB(){
 }
 
 bootstrap();
-
