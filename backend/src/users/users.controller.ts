@@ -16,20 +16,20 @@ export class UsersController {
     @Roles('ADMIN')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     create(@Body() createUserDto: CreateUserDto) {
-        var user = {
+        const user = {
             email: createUserDto.email,
             username: createUserDto.username,
             password: createUserDto.password,
             first_name: createUserDto.first_name,
             last_name: createUserDto.last_name,
             create_at: new Date(),
-            update_at: new Date()
+            update_at: new Date(),
         };
-        
+
         this.usersService.create(user);
         return user;
     }
- 
+
     @Get()
     @Roles('ADMIN')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -39,9 +39,9 @@ export class UsersController {
          */
         return this.usersService.findAll();
     }
-  
+
     @Get(':id')
-    @Roles('ADMIN')
+    // @Roles('ADMIN')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     findOne(@Param('id') id: number) {
 
@@ -50,7 +50,7 @@ export class UsersController {
        */
       return this.usersService.findOne(id);
     }
-  
+
     @Put(':id')
     @Roles('ADMIN')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
@@ -61,7 +61,7 @@ export class UsersController {
        */
       return `This action updates a #${id} user`;
     }
-  
+
     @Delete(':id')
     @Roles('ADMIN')
     @UseGuards(AuthGuard('jwt'), RolesGuard)

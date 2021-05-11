@@ -16,10 +16,11 @@ export class User {
   email: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+    // tslint:disable-next-line:variable-name
   create_at: Date;
-  
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+    // tslint:disable-next-line:variable-name
   update_at: Date;
 
   // @ManyToOne(type => Role, role => role.users)
@@ -30,8 +31,10 @@ export class User {
   roles: Role[];
 
   @Column()
+    // tslint:disable-next-line:variable-name
   first_name: string;
 
   @Column()
+    // tslint:disable-next-line:variable-name
   last_name: string;
 }

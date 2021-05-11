@@ -18,24 +18,23 @@ export class UsersService {
 
   findAll(): Promise<User[]> {
     return this.userRepository.find();
-    //return this.users;
+    // return this.users;
   }
 
-  async findSigned(email:string | undefined, username: string | undefined, pass:string): Promise<User>{
+  async findSigned(email: string | undefined, username: string | undefined, pass: string): Promise<User> {
 
     let user;
-    if(email){
-      user = await this.userRepository.findOne({ where: { email: email}, relations: ["roles"]});
-    }else if(username){
-      user = await this.userRepository.findOne({ where: { username: username}, relations: ["roles"]});
-    }else{
+    if (email) {
+      user = await this.userRepository.findOne({ where: { email}, relations: ['roles']});
+    } else if (username) {
+      user = await this.userRepository.findOne({ where: { username}, relations: ['roles']});
+    } else {
       user = undefined;
     }
     return user;
   }
 
-    
-  async findOne(id:number): Promise<User> {
-    return await this.userRepository.findOne(id, {relations: ["roles"]});
+  async findOne(id: number): Promise<User> {
+    return await this.userRepository.findOne(id, {relations: ['roles']});
   }
 }
