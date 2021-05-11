@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from './_services';
 import { User, RoleEnum } from './_models';
 
-@Component({ selector: 'app', templateUrl: 'app.component.html' })
+// tslint:disable-next-line:component-selector
+@Component({selector: 'app',
+            templateUrl: 'app.component.html'
+})
 export class AppComponent {
     currentUser: User;
 
@@ -16,15 +19,15 @@ export class AppComponent {
     }
 
     get isAdmin() {
-        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.Admin;
+        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.ADMIN;
     }
 
     get isStore() {
-        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.Store;
+        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.DYQAN;
     }
 
     get isWarehouse() {
-        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.Warehouse;
+        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.MAGAZINA;
     }
 
     logout() {

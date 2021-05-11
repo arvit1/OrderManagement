@@ -19,19 +19,19 @@ const appRoutes: Routes = [
         path: 'store',
         component: StoreComponent,
         canActivate: [AuthGuard],
-        data: { roles: [RoleEnum.Store] }
+        data: { roles: [RoleEnum.DYQAN] }
     },
     {
         path: 'warehouse',
         component: WarehouseComponent,
         canActivate: [AuthGuard],
-        data: { roles: [RoleEnum.Warehouse] }
+        data: { roles: [RoleEnum.MAGAZINA] }
     },
     {
         path: 'admin',
         component: AdminComponent,
         canActivate: [AuthGuard],
-        data: { roles: [RoleEnum.Admin] }
+        data: { roles: [RoleEnum.ADMIN] }
     },
     {
         path: 'login',
