@@ -8,10 +8,10 @@ export class UserService {
     constructor(private http: HttpClient) {}
 
     getAll() {
-        return this.http.get<User[]>(`http://5.189.155.214:3000/api/users`);
+        return this.http.get<User[]>(`http://localhost:3000/api/users`);
     }
 
     getById(id: number) {
-        return this.http.get<User>(`http://5.189.155.214:3000/api/users/${id}`);
+        return this.http.get<User>(`http://localhost:3000/api/users/${id}`);
     }
 }

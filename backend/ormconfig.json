@@ -1,10 +1,10 @@
 {
   "type": "mysql",
-  "host": "remotemysql.com",
+  "host": "freedb.tech",
   "port": 3306,
-  "username": "5TZfuocCnD",
-  "password": "qgESMr8T5w",
-  "database": "5TZfuocCnD",
+  "username": "freedbtech_arvit",
+  "password": "Mclaren1!",
+  "database": "freedbtech_arvit",
   "entities": [
     "src/**/entities/*.entity{.ts,.js}"
   ],
