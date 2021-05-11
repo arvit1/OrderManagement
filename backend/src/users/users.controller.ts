@@ -41,7 +41,7 @@ export class UsersController {
     }
 
     @Get(':id')
-    // @Roles('ADMIN')
+    @Roles('ADMIN', 'DYQAN', 'MAGAZINA')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     findOne(@Param('id') id: number) {
 
