@@ -4,7 +4,7 @@ import {ListUserDto} from './dto/list-user.dto';
 import {UpdateUserDto} from './dto/update-user.dto';
 import {UsersService} from './users.service';
 import {AuthGuard} from '@nestjs/passport';
-import {RolesGuard} from "../auth/guards/role.guard";
+import {RolesGuard} from '../auth/guards/role.guard';
 import {Roles} from '../auth/roles.decorator';
 
 @Controller('api/users')
@@ -20,10 +20,10 @@ export class UsersController {
             email: createUserDto.email,
             username: createUserDto.username,
             password: createUserDto.password,
-            first_name: createUserDto.first_name,
-            last_name: createUserDto.last_name,
-            create_at: new Date(),
-            update_at: new Date(),
+            firstName: createUserDto.firstName,
+            lastName: createUserDto.lastName,
+            createAt: new Date(),
+            updateAt: new Date(),
         };
 
         this.usersService.create(user);
@@ -41,7 +41,6 @@ export class UsersController {
     }
 
     @Get(':id')
-    @Roles('ADMIN', 'DYQAN', 'MAGAZINA')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     findOne(@Param('id') id: number) {
 

@@ -9,11 +9,11 @@ export class Role {
     @Column()
     name: string;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-    create_at: Date;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'createAt'})
+    createAt: Date;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-    update_at: Date;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'updateAt'})
+    updateAt: Date;
 
     // @OneToMany(type => User, user => user.role)
     // users: User[];

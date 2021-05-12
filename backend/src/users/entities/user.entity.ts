@@ -15,13 +15,11 @@ export class User {
   @Column()
   email: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-    // tslint:disable-next-line:variable-name
-  create_at: Date;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'createAt'})
+  createAt: Date;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-    // tslint:disable-next-line:variable-name
-  update_at: Date;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'updateAt'})
+  updateAt: Date;
 
   // @ManyToOne(type => Role, role => role.users)
   // role: Role;
@@ -30,11 +28,9 @@ export class User {
   @JoinTable()
   roles: Role[];
 
-  @Column()
-    // tslint:disable-next-line:variable-name
-  first_name: string;
+  @Column({name: 'firstName'})
+  firstName: string;
 
-  @Column()
-    // tslint:disable-next-line:variable-name
-  last_name: string;
+  @Column({name: 'lastName'})
+  lastName: string;
 }

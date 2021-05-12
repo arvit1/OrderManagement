@@ -1,6 +1,6 @@
 export interface IRole {
 
     name: string;
-    create_at?: Date;
-    update_at?: Date;
+    createAt?: Date;
+    updateAt?: Date;
 }

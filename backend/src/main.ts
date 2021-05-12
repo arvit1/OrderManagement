@@ -66,7 +66,7 @@ async function initDB() {
           bcrypt.hash('password', salt, async (err2, hash) => {
             await transactionalEntityManager.connection.getRepository(User).save(
               { id: 1, username: 'admin', email: 'admin@admin.it', password: hash, roles: [adminRole, magazinaRole, dyqanRole],
-                first_name: 'adminFirst', last_name: 'adminLast'});
+                firstName: 'adminFirst', lastName: 'adminLast'});
           });
        });
       }
@@ -78,7 +78,7 @@ async function initDB() {
           bcrypt.hash('password', salt, async (err2, hash) => {
             await transactionalEntityManager.connection.getRepository(User).save(
               { id: 2, username: 'magazina', email: 'magazina@member.it', password: hash, roles: [magazinaRole, dyqanRole],
-                first_name: 'magazinaFirst', last_name: 'magazinaLast'});
+                firstName: 'magazinaFirst', lastName: 'magazinaLast'});
           });
        });
       }
@@ -90,7 +90,7 @@ async function initDB() {
           bcrypt.hash('password', salt, async (err2, hash) => {
             await transactionalEntityManager.connection.getRepository(User).save(
               { id: 3, username: 'dyqan', email: 'dyqan@member.it', password: hash, roles: [dyqanRole],
-                first_name: 'dyqanFirst', last_name: 'dyqanLast'});
+                firstName: 'dyqanFirst', lastName: 'dyqanLast'});
           });
         });
       }
