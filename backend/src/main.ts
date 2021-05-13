@@ -31,16 +31,16 @@ async function bootstrap() {
 }
 
 async function initDB() {
-  let adminRole;
+  let rootless;
   let dyqanRole;
   let magazinaRole;
   await getConnection().transaction(async transactionalEntityManager => {
 
     // Crea Ruolo ADMIN
-    adminRole = await transactionalEntityManager.connection.getRepository(Role).findOne(1).then(async (role) => {
+    rootless = await transactionalEntityManager.connection.getRepository(Role).findOne(1).then(async (role) => {
       // tslint:disable-next-line:triple-equals
       if (role === undefined) {
-        role = await transactionalEntityManager.connection.getRepository(Role).save({id: 1, name: 'ADMIN'});
+        role = await transactionalEntityManager.connection.getRepository(Role).save({id: 1, name: 'ROOTLESS'});
       }
       return role;
     });
@@ -50,7 +50,7 @@ async function initDB() {
     // Crea Ruolo MEMBER
     magazinaRole = await transactionalEntityManager.connection.getRepository(Role).findOne(2).then(async (role) => {
       if (role === undefined) {
-        role = await transactionalEntityManager.connection.getRepository(Role).save({id: 2, name: 'MAGAZINA'});
+        role = await transactionalEntityManager.connection.getRepository(Role).save({id: 2, name: 'EXPERT'});
       }
       return role;
     });
@@ -59,7 +59,7 @@ async function initDB() {
   await getConnection().transaction(async transactionalEntityManager => {
     dyqanRole = await transactionalEntityManager.connection.getRepository(Role).findOne(3).then(async (role) => {
       if (role === undefined) {
-        role = await transactionalEntityManager.connection.getRepository(Role).save({id: 3, name: 'DYQAN'});
+        role = await transactionalEntityManager.connection.getRepository(Role).save({id: 3, name: 'CURIOUS'});
       }
       return role;
     });
@@ -74,7 +74,7 @@ async function initDB() {
           bcrypt.hash('password', salt, async (err2, hash) => {
             await transactionalEntityManager.connection.getRepository(User).save(
               {
-                id: 1, username: 'admin', email: 'admin@admin.it', password: hash, roles: [adminRole, magazinaRole, dyqanRole],
+                id: 1, username: 'ROOTLESS', email: 'admin@admin.it', password: hash, roles: [rootless, magazinaRole, dyqanRole],
                 firstName: 'adminFirst', lastName: 'adminLast',
               });
           });
@@ -90,7 +90,7 @@ async function initDB() {
           bcrypt.hash('password', salt, async (err2, hash) => {
             await transactionalEntityManager.connection.getRepository(User).save(
               {
-                id: 2, username: 'magazina', email: 'magazina@member.it', password: hash, roles: [magazinaRole, dyqanRole],
+                id: 2, username: 'EXPERT', email: 'magazina@member.it', password: hash, roles: [magazinaRole, dyqanRole],
                 firstName: 'magazinaFirst', lastName: 'magazinaLast',
               });
           });
@@ -106,7 +106,7 @@ async function initDB() {
           bcrypt.hash('password', salt, async (err2, hash) => {
             await transactionalEntityManager.connection.getRepository(User).save(
               {
-                id: 3, username: 'dyqan', email: 'dyqan@member.it', password: hash, roles: [dyqanRole],
+                id: 3, username: 'CURIOUS', email: 'dyqan@member.it', password: hash, roles: [dyqanRole],
                 firstName: 'dyqanFirst', lastName: 'dyqanLast',
               });
           });

@@ -13,7 +13,7 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     @Post()
-    @Roles('ADMIN')
+    @Roles('ROOTLESS')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     create(@Body() createUserDto: CreateUserDto) {
         const user = {
@@ -31,7 +31,7 @@ export class UsersController {
     }
 
     @Get()
-    @Roles('ADMIN')
+    @Roles('ROOTLESS')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     findAll(@Query() query: ListUserDto) {
         /**
@@ -51,7 +51,7 @@ export class UsersController {
     }
 
     @Put(':id')
-    @Roles('ADMIN')
+    @Roles('ROOTLESS')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
 
@@ -62,7 +62,7 @@ export class UsersController {
     }
 
     @Delete(':id')
-    @Roles('ADMIN')
+    @Roles('ROOTLESS')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     remove(@Param('id') id: string) {
 

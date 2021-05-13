@@ -13,39 +13,39 @@ export class RolesController {
     constructor(private readonly rolesService: RolesService) {}
 
     @Post()
-    @Roles('ADMIN')
+    @Roles('ROOTLESS')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     create(@Body() createRoleDto: CreateRoleDto) {
-        
+
         return this.rolesService.create(createRoleDto);
         //return 'This action adds a new user';
     }
- 
+
     @Get()
-    @Roles('ADMIN')
+    @Roles('ROOTLESS')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     findAll(@Query() query: ListUserDto) {
 
         var roles = this.rolesService.findAll();
         return roles;
     }
-  
+
     @Get(':id')
-    @Roles('ADMIN')
+    @Roles('ROOTLESS')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     findOne(@Param('id') id: string) {
       return `This action returns a #${id} user`;
     }
-  
+
     @Put(':id')
-    @Roles('ADMIN')
+    @Roles('ROOTLESS')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
       return `This action updates a #${id} user`;
     }
-  
+
     @Delete(':id')
-    @Roles('ADMIN')
+    @Roles('ROOTLESS')
     @UseGuards(AuthGuard('jwt'), RolesGuard)
     remove(@Param('id') id: string) {
       return `This action removes a #${id} user`;

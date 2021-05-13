@@ -1,5 +1,5 @@
 ﻿export enum RoleEnum {
-    ADMIN = 'ADMIN',
-    DYQAN = 'DYQAN',
-    MAGAZINA = 'MAGAZINA'
+  ROOTLESS = 'ROOTLESS',
+  CURIOUS = 'CURIOUS',
+  EXPERT = 'EXPERT'
 }

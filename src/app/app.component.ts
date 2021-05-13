@@ -19,15 +19,15 @@ export class AppComponent {
     }
 
     get isAdmin() {
-        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.ADMIN;
+        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.ROOTLESS;
     }
 
     get isStore() {
-        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.DYQAN;
+        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.CURIOUS;
     }
 
     get isWarehouse() {
-        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.MAGAZINA;
+        return this.currentUser && this.currentUser.roles[0].name === RoleEnum.EXPERT;
     }
 
     logout() {
