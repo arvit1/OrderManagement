@@ -1,10 +1,10 @@
 {
   "type": "mysql",
-  "host": "freedb.tech",
+  "host": "f80b6byii2vwv8cx.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
   "port": 3306,
-  "username": "freedbtech_arvit",
-  "password": "Mclaren1!",
-  "database": "freedbtech_arvit",
+  "username": "x8ewjekp5ujtugrf",
+  "password": "smevfb0200a9tqaf",
+  "database": "yqnchb4nqddphk35",
   "entities": [
     "src/**/entities/*.entity{.ts,.js}"
   ],
