@@ -10,8 +10,12 @@ export class AppController {
   ) {}
 
   @Get()
-  async getHello() {
+  getHello() {
+    return this.appService.getHello();
+  }
+
+  @Get("/kot")
+  async entityManagerTest() {
     return await this.entityManager.query("SELECT * FROM role");
-    // return this.appService.getHello();
   }
 }
